@@ -1,0 +1,98 @@
+---
+import { getImage } from "astro:assets";
+import cardBackground from "../images/bg-card-front.png";
+
+interface Props {
+  cardHolderName: string;
+  cardNumber: number;
+  expirationDate: { month: number; year: number };
+  classNames?: string[];
+}
+
+const creditCardBackground = await getImage({
+  src: cardBackground,
+  quality: "max",
+  width: 447,
+  height: 245,
+});
+
+const { cardHolderName, cardNumber, expirationDate } = Astro.props;
+const { classNames } = Astro.props;
+---
+
+<aside
+  style={`background: url(${creditCardBackground.src}) top left / cover no-repeat;`}
+  class:list={[classNames]}
+>
+  <div class='circles'>
+    <svg width='40' height='40' xmlns='http://www.w3.org/2000/svg'>
+      <circle cx='20' cy='20' r='20' fill='white'></circle>
+    </svg>
+
+    <svg width='20' height='20' xmlns='http://www.w3.org/2000/svg'>
+      <circle
+        cx='10'
+        cy='10'
+        r='9.5'
+        fill='transparent'
+        stroke='white'
+        stroke-width='1'></circle>
+    </svg>
+  </div>
+
+  <div class='card-info'>
+    <p class='number'>
+      {cardNumber}
+    </p>
+    <div>
+      <p class='name'>
+        {cardHolderName}
+      </p>
+      <p>
+        {expirationDate.month}/{expirationDate.year}
+      </p>
+    </div>
+  </div>
+</aside>
+
+<style>
+  aside {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    letter-spacing: 0.25ch;
+    padding: 2rem;
+    width: 447px;
+    height: 245px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .number {
+      font-size: 24px;
+      letter-spacing: 0.25rem;
+    }
+
+    .name {
+      text-transform: uppercase;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .circles {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>
