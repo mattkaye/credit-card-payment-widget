@@ -1,0 +1,107 @@
+<article>
+  <svg width='100' height='100' xmlns='http://www.w3.org/2000/svg'>
+    <defs>
+      <linearGradient id='grad1' x1='0%' y1='0%' x2='0%' y2='100%'>
+        <stop offset='0%' style='stop-color:rgb(94,61,235);stop-opacity:1'
+        ></stop>
+        <stop offset='100%' style='stop-color:rgb(81,34,114);stop-opacity:1'
+        ></stop>
+      </linearGradient>
+    </defs>
+    <circle cx='50' cy='50' r='50' fill='url(#grad1)'></circle>
+    <path
+      d='M35 50 l10 10 l20 -20'
+      stroke='white'
+      stroke-width='5'
+      fill='none'
+      transform='scale(1)'></path>
+  </svg>
+  <div>
+    <p>Thank you!</p>
+    <p>We've added your card details.</p>
+  </div>
+</article>
+
+<script>
+  const duration = 2000;
+  const animationEnd = Date.now() + duration;
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  const interval = setInterval(function () {
+    const timeLeft = animationEnd - Date.now();
+
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+
+    const particleCount = 50 * (timeLeft / duration);
+    // since particles fall down, start a bit higher than random
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+    });
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+    });
+  }, 250);
+</script>
+
+<style>
+  article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  svg {
+    animation: success 0.3s ease-out;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  p {
+    font-size: 2.8ch;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+  }
+
+  p:nth-of-type(2) {
+    color: var(--dark-gray-violet);
+    font-size: 1.25rem;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  @keyframes success {
+    0% {
+      opacity: 0;
+      transform: scaleX(-1);
+    }
+
+    33% {
+      transform: scaleX(1);
+    }
+
+    66% {
+      transform: scaleX(-1);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+</style>

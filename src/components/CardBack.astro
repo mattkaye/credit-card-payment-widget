@@ -1,15 +1,71 @@
 ---
+import { getImage } from "astro:assets";
+import cardBackground from "../images/bg-card-back.png";
+
 interface Props {
   cvc: number;
+  classNames?: string[];
 }
 
-const { cvc } = Astro.props;
+const creditCardBackground = await getImage({
+  src: cardBackground,
+  quality: "max",
+  width: 447,
+  height: 245,
+});
+
+const { cvc, classNames } = Astro.props;
 ---
 
-<div>
-  <p>
-    CVC: {cvc}
-  </p>
-</div>
+<aside
+  style={`background: url(${creditCardBackground.src}) top left / cover no-repeat;`}
+  class:list={[classNames]}
+>
+  <p>{cvc}</p>
+</aside>
 
-<style></style>
+<style>
+  aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    letter-spacing: 0.25ch;
+    padding: 2rem;
+    width: 447px;
+    height: 245px;
+  }
+
+  p {
+    color: white;
+    font-size: smaller;
+    text-align: right;
+    transform: translate(-5%, 390%);
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .number {
+      font-size: 2.8ch;
+      letter-spacing: 0.25rem;
+    }
+
+    .name-and-date {
+      text-transform: uppercase;
+      font-size: smaller;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .circles {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>

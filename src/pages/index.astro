@@ -5,6 +5,7 @@ import Layout from "../layouts/Layout.astro";
 import CardFront from "../components/CardFront.astro";
 import CardBack from "../components/CardBack.astro";
 import PaymentForm from "../components/PaymentForm.astro";
+import PaymentComplete from "../components/PaymentComplete.astro";
 
 const cardColumnBackground = await getImage({
   src: gradientBackground,
@@ -21,18 +22,19 @@ const cardColumnBackground = await getImage({
       <CardFront
         cardHolderName='Frank Jones'
         cardNumber={7666444873649821}
-        expirationDate={{ month: 3, year: 2029 }}
+        expirationDate={{ month: 3, year: 29 }}
         classNames={["front-card-styles"]}
       />
-      <CardBack cvc={747} />
+      <CardBack cvc={747} classNames={["back-card-styles"]} />
     </section>
     <section>
       <PaymentForm />
+      <!-- <PaymentComplete /> -->
     </section>
   </main>
 </Layout>
 
-<style is:global>
+<style>
   main {
     display: flex;
     height: 100vh;
@@ -46,12 +48,99 @@ const cardColumnBackground = await getImage({
     width: 100%;
 
     &.cards {
-      flex-basis: 80%;
+      flex-basis: 60%;
+      position: relative;
     }
 
-    .front-card-styles {
-      transform: translateX(40%);
+    .front-card-styles,
+    .back-card-styles {
+      position: absolute;
+      top: -5%;
+      z-index: 2;
+      transform: translate(0, 100%);
+      right: -8rem;
       filter: drop-shadow(9px 12px 12px rgba(0, 0, 0, 0.3));
+      transition: all 300ms;
+    }
+
+    .back-card-styles {
+      right: 0;
+      z-index: 1;
+      transform: translate(50%, 215%);
+    }
+  }
+
+  /* Shrink and move cards so they don't touch the form */
+  @media (width <= 1500px) {
+    section {
+      .front-card-styles,
+      .back-card-styles {
+        transform: translate(0, 100%) scale(0.75);
+        right: 0;
+      }
+
+      .back-card-styles {
+        transform: translate(0%, 185%) scale(0.75);
+      }
+    }
+  }
+
+  @media (width <= 1000px) {
+    section {
+      .front-card-styles,
+      .back-card-styles {
+        transform: translate(10%, 100%) scale(0.5);
+      }
+
+      .back-card-styles {
+        transform: translate(10%, 157%) scale(0.5);
+      }
+    }
+  }
+
+  @media (width <= 800px) {
+    main {
+      flex-direction: column;
+    }
+
+    section {
+      form {
+        margin: 5rem 0 2rem;
+      }
+      &.cards {
+        flex-basis: 40%;
+
+        .front-card-styles,
+        .back-card-styles {
+          left: 50%;
+          transform: translate(-65%, 55%) scale(0.75);
+        }
+
+        .back-card-styles {
+          transform: translate(-50%, 20px) scale(0.75);
+        }
+      }
+    }
+  }
+
+  @media (width <= 500px) {
+    section {
+      form {
+        margin: 2rem 0 2rem;
+      }
+
+      &.cards {
+        flex-basis: 30%;
+
+        .front-card-styles,
+        .back-card-styles {
+          transform: translate(-60%, 40%) scale(0.5);
+        }
+
+        .back-card-styles {
+          transform: translate(-50%, 10%) scale(0.5);
+        }
+      }
     }
   }
 </style>
