@@ -27,9 +27,11 @@ const cardColumnBackground = await getImage({
       />
       <CardBack cvc={747} classNames={["back-card-styles"]} />
     </section>
-    <section>
+    <!-- <section>
       <PaymentForm />
-      <!-- <PaymentComplete /> -->
+    </section> -->
+    <section class='confirmation'>
+      <PaymentComplete />
     </section>
   </main>
 </Layout>
@@ -50,6 +52,10 @@ const cardColumnBackground = await getImage({
     &.cards {
       flex-basis: 60%;
       position: relative;
+    }
+
+    &.confirmation {
+      height: 100%;
     }
 
     .front-card-styles,
@@ -108,7 +114,8 @@ const cardColumnBackground = await getImage({
         margin: 5rem 0 2rem;
       }
       &.cards {
-        flex-basis: 40%;
+        flex-basis: auto;
+        min-height: 18rem;
 
         .front-card-styles,
         .back-card-styles {
@@ -126,19 +133,61 @@ const cardColumnBackground = await getImage({
   @media (width <= 500px) {
     section {
       form {
-        margin: 2rem 0 2rem;
+        margin: 8rem 0 2rem;
       }
 
       &.cards {
-        flex-basis: 30%;
+        min-height: 13rem;
 
         .front-card-styles,
         .back-card-styles {
-          transform: translate(-60%, 40%) scale(0.5);
+          transform: translate(-60%, 40%) scale(0.65);
         }
 
         .back-card-styles {
-          transform: translate(-50%, 10%) scale(0.5);
+          transform: translate(-50%, 0%) scale(0.65);
+        }
+      }
+    }
+  }
+
+  @media (width <= 390px) {
+    section {
+      form {
+        margin: 4rem 0 2rem;
+      }
+
+      &.cards {
+        .front-card-styles,
+        .back-card-styles {
+          transform: translate(-60%, 30%) scale(0.5);
+        }
+
+        .back-card-styles {
+          transform: translate(-50%, 0%) scale(0.5);
+        }
+      }
+
+      .metadata {
+        flex-direction: column;
+      }
+    }
+  }
+
+  @media (orientation: landscape) and (width < 900px) {
+    section {
+      form {
+        margin: 4rem 0 2rem;
+      }
+
+      &.cards {
+        .front-card-styles,
+        .back-card-styles {
+          transform: translate(15%, 10%) scale(0.5);
+        }
+
+        .back-card-styles {
+          transform: translate(15%, 65%) scale(0.5);
         }
       }
     }

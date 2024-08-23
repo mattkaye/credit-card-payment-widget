@@ -61,8 +61,8 @@ const {} = Astro.props;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 500px;
     gap: 2rem;
+    padding: 0 2rem;
   }
 
   input {
@@ -106,6 +106,17 @@ const {} = Astro.props;
 
       input {
         width: 8ch;
+      }
+    }
+  }
+
+  @media (width <= 500px) {
+    label[for="expirationMonth"],
+    label[for="cvc"] {
+      > div {
+        input {
+          width: 100%;
+        }
       }
     }
   }
