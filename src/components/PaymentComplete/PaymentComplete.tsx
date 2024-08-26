@@ -28,7 +28,7 @@ const PaymentComplete = ({ cardHolderName }: { cardHolderName: string }) => {
         <p>Thank you {cardHolderName}!</p>
         <p>We've added your card details.</p>
       </div>
-      {/* <Confetti /> */}
+      <Confetti />
     </article>
   );
 };

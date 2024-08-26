@@ -1,4 +1,4 @@
-import { type SetStateAction } from "react";
+import { useRef, type SetStateAction } from "react";
 import InputMask from "react-input-mask";
 import "./styles.css";
 
@@ -7,6 +7,7 @@ const PaymentForm = ({
   setCardNumber,
   setExpirationDate,
   setCVC,
+  setFormComplete,
 }: {
   setCardHolderName: React.Dispatch<React.SetStateAction<string>>;
   setCardNumber: React.Dispatch<React.SetStateAction<string>>;
@@ -14,9 +15,10 @@ const PaymentForm = ({
     React.SetStateAction<{ month: string; year: string }>
   >;
   setCVC: React.Dispatch<React.SetStateAction<string>>;
+  setFormComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <form>
+    <form onSubmit={() => setFormComplete(true)}>
       <label htmlFor='cardholderName'>
         <p>Cardholder Name</p>
         <InputMask
@@ -49,6 +51,7 @@ const PaymentForm = ({
           <p>Expiration Date</p>
           <div>
             <InputMask
+              required
               id='expirationMonth'
               mask='99'
               inputMode='numeric'
@@ -65,6 +68,7 @@ const PaymentForm = ({
               Expiration Year
             </label>
             <InputMask
+              required
               id='expirationYear'
               mask='99'
               inputMode='numeric'
@@ -83,6 +87,7 @@ const PaymentForm = ({
           <p>CVC</p>
           <div>
             <InputMask
+              required
               id='cvc'
               mask='999'
               inputMode='numeric'
@@ -96,7 +101,7 @@ const PaymentForm = ({
           </div>
         </label>
       </div>
-      <button>Confirm</button>
+      <button type='submit'>Confirm</button>
     </form>
   );
 };

@@ -14,6 +14,8 @@ const ReactParent = () => {
     year: "00",
   });
   const [CVC, setCVC] = useState("000");
+  const [formComplete, setFormComplete] = useState(false);
+
   return (
     <>
       <section
@@ -29,17 +31,26 @@ const ReactParent = () => {
         />
         <CardBack cvc={CVC} />
       </section>
-      <section>
-        <PaymentForm
-          setCardHolderName={setCardHolderName}
-          setCardNumber={setCardNumber}
-          setExpirationDate={setExpirationDate}
-          setCVC={setCVC}
-        />
-      </section>
-      {/* <section className='confirmation'>
-        <PaymentComplete cardHolderName={cardHolderName} />
-      </section> */}
+
+      {!formComplete && (
+        <>
+          <section>
+            <PaymentForm
+              setCardHolderName={setCardHolderName}
+              setCardNumber={setCardNumber}
+              setExpirationDate={setExpirationDate}
+              setCVC={setCVC}
+              setFormComplete={setFormComplete}
+            />
+          </section>
+        </>
+      )}
+
+      {formComplete && (
+        <section className='confirmation'>
+          <PaymentComplete cardHolderName={cardHolderName} />
+        </section>
+      )}
     </>
   );
 };
