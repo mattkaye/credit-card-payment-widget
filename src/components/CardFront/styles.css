@@ -1,0 +1,42 @@
+aside {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  letter-spacing: 0.25ch;
+  padding: 2rem;
+  width: 447px;
+  height: 245px;
+
+  p {
+    margin: 0;
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .number {
+      font-size: 2.8ch;
+      margin: 0;
+      letter-spacing: 0.25rem;
+    }
+
+    .name-and-date {
+      text-transform: uppercase;
+      font-size: smaller;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .circles {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}

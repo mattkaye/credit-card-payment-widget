@@ -1,38 +1,11 @@
 ---
-import { getImage } from "astro:assets";
-import gradientBackground from "../images/bg-main-desktop.png";
 import Layout from "../layouts/Layout.astro";
-import CardFront from "../components/CardFront.astro";
-import CardBack from "../components/CardBack.astro";
-import PaymentForm from "../components/PaymentForm.astro";
-import PaymentComplete from "../components/PaymentComplete.astro";
-
-const cardColumnBackground = await getImage({
-  src: gradientBackground,
-  quality: "max",
-});
+import ReactParent from "../components/ReactParent/ReactParent";
 ---
 
-<Layout title='Enter Your Payment Information'>
+<Layout>
   <main>
-    <section
-      class='cards'
-      style={`background: url(${cardColumnBackground.src}) top left / cover no-repeat;`}
-    >
-      <CardFront
-        cardHolderName='Frank Jones'
-        cardNumber={7666444873649821}
-        expirationDate={{ month: 3, year: 29 }}
-        classNames={["front-card-styles"]}
-      />
-      <CardBack cvc={747} classNames={["back-card-styles"]} />
-    </section>
-    <!-- <section>
-      <PaymentForm />
-    </section> -->
-    <section class='confirmation'>
-      <PaymentComplete />
-    </section>
+    <ReactParent client:load />
   </main>
 </Layout>
 

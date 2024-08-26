@@ -1,0 +1,6 @@
+.back-card-styles p {
+  color: white;
+  font-size: smaller;
+  text-align: right;
+  transform: translate(-5%, 470%);
+}

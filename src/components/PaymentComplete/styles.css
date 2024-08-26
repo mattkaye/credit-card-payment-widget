@@ -1,0 +1,50 @@
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  svg {
+    animation: success 0.75s ease-out;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  p {
+    font-size: 2.8ch;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+  }
+
+  p:nth-of-type(2) {
+    color: var(--dark-gray-violet);
+    font-size: 1.25rem;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+}
+
+@keyframes success {
+  0% {
+    opacity: 0;
+    transform: scaleX(-1);
+  }
+
+  33% {
+    transform: scaleX(1);
+  }
+
+  66% {
+    transform: scaleX(-1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}

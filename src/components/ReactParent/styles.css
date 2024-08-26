@@ -1,0 +1,150 @@
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  &.cards {
+    flex-basis: 60%;
+    position: relative;
+  }
+
+  &.confirmation {
+    height: 100%;
+  }
+
+  .front-card-styles,
+  .back-card-styles {
+    position: absolute;
+    top: -5%;
+    z-index: 2;
+    transform: translate(0, 100%);
+    right: -8rem;
+    filter: drop-shadow(9px 12px 12px rgba(0, 0, 0, 0.3));
+    transition: all 300ms;
+  }
+
+  .back-card-styles {
+    right: 0;
+    z-index: 1;
+    transform: translate(50%, 215%);
+  }
+}
+
+/* Shrink and move cards so they don't touch the form */
+@media (width <= 1500px) {
+  section {
+    .front-card-styles,
+    .back-card-styles {
+      transform: translate(0, 100%) scale(0.75);
+      right: 0;
+    }
+
+    .back-card-styles {
+      transform: translate(0%, 185%) scale(0.75);
+    }
+  }
+}
+
+@media (width <= 1000px) {
+  section {
+    .front-card-styles,
+    .back-card-styles {
+      transform: translate(10%, 100%) scale(0.5);
+    }
+
+    .back-card-styles {
+      transform: translate(10%, 157%) scale(0.5);
+    }
+  }
+}
+
+@media (width <= 800px) {
+  main {
+    flex-direction: column;
+  }
+
+  section {
+    form {
+      margin: 5rem 0 2rem;
+    }
+    &.cards {
+      flex-basis: auto;
+      min-height: 18rem;
+
+      .front-card-styles,
+      .back-card-styles {
+        left: 50%;
+        transform: translate(-65%, 55%) scale(0.75);
+      }
+
+      .back-card-styles {
+        transform: translate(-50%, 20px) scale(0.75);
+      }
+    }
+  }
+}
+
+@media (width <= 500px) {
+  section {
+    form {
+      margin: 8rem 0 2rem;
+    }
+
+    &.cards {
+      min-height: 13rem;
+
+      .front-card-styles,
+      .back-card-styles {
+        transform: translate(-60%, 40%) scale(0.65);
+      }
+
+      .back-card-styles {
+        transform: translate(-50%, 0%) scale(0.65);
+      }
+    }
+  }
+}
+
+@media (width <= 390px) {
+  section {
+    form {
+      margin: 4rem 0 2rem;
+    }
+
+    &.cards {
+      .front-card-styles,
+      .back-card-styles {
+        transform: translate(-60%, 30%) scale(0.5);
+      }
+
+      .back-card-styles {
+        transform: translate(-50%, 0%) scale(0.5);
+      }
+    }
+
+    .metadata {
+      flex-direction: column;
+    }
+  }
+}
+
+@media (orientation: landscape) and (width < 900px) {
+  section {
+    form {
+      margin: 4rem 0 2rem;
+    }
+
+    &.cards {
+      .front-card-styles,
+      .back-card-styles {
+        transform: translate(15%, 10%) scale(0.5);
+      }
+
+      .back-card-styles {
+        transform: translate(15%, 65%) scale(0.5);
+      }
+    }
+  }
+}
