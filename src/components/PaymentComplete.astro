@@ -9,12 +9,8 @@
       </linearGradient>
     </defs>
     <circle cx='50' cy='50' r='50' fill='url(#grad1)'></circle>
-    <path
-      d='M35 50 l10 10 l20 -20'
-      stroke='white'
-      stroke-width='5'
-      fill='none'
-      transform='scale(1)'></path>
+    <path d='M35 50 l10 10 l20 -20' stroke='white' stroke-width='5' fill='none'
+    ></path>
   </svg>
   <div>
     <p>Thank you!</p>
@@ -27,7 +23,7 @@
   const animationEnd = Date.now() + duration;
   const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-  function randomInRange(min, max) {
+  function randomInRange(min: number, max: number) {
     return Math.random() * (max - min) + min;
   }
 
