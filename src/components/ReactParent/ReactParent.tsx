@@ -8,6 +8,12 @@ import PaymentComplete from "../PaymentComplete/PaymentComplete";
 
 const ReactParent = () => {
   const [cardHolderName, setCardHolderName] = useState("Jane Appleseed");
+  const [cardNumber, setCardNumber] = useState("0000 0000 0000 0000");
+  const [expirationDate, setExpirationDate] = useState({
+    month: "0",
+    year: "00",
+  });
+  const [CVC, setCVC] = useState("000");
   return (
     <>
       <section
@@ -18,13 +24,18 @@ const ReactParent = () => {
       >
         <CardFront
           cardHolderName={cardHolderName}
-          cardNumber={"0000000000000000"}
-          expirationDate={{ month: "0", year: "00" }}
+          cardNumber={cardNumber}
+          expirationDate={expirationDate}
         />
-        <CardBack cvc={"000"} />
+        <CardBack cvc={CVC} />
       </section>
       <section>
-        <PaymentForm setCardHolderName={setCardHolderName} />
+        <PaymentForm
+          setCardHolderName={setCardHolderName}
+          setCardNumber={setCardNumber}
+          setExpirationDate={setExpirationDate}
+          setCVC={setCVC}
+        />
       </section>
       {/* <section className='confirmation'>
         <PaymentComplete cardHolderName={cardHolderName} />

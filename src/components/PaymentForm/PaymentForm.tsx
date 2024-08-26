@@ -1,46 +1,46 @@
-import { useRef, useEffect } from "react";
+import { type SetStateAction } from "react";
+import InputMask from "react-input-mask";
 import "./styles.css";
 
 const PaymentForm = ({
   setCardHolderName,
+  setCardNumber,
+  setExpirationDate,
+  setCVC,
 }: {
   setCardHolderName: React.Dispatch<React.SetStateAction<string>>;
+  setCardNumber: React.Dispatch<React.SetStateAction<string>>;
+  setExpirationDate: React.Dispatch<
+    React.SetStateAction<{ month: string; year: string }>
+  >;
+  setCVC: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const cardHolderNameField = useRef<HTMLInputElement>(null);
-
-  const updateCardHolderName = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const regex = /^[A-Za-z\s]$/;
-    if (e.key === "Backspace" || regex.test(e.key)) {
-      setCardHolderName((prev) => {
-        if (cardHolderNameField.current !== null) {
-          return cardHolderNameField.current.value;
-        }
-        return prev;
-      });
-    } else {
-      // Remove anything extra on blur?
-    }
-  };
-
   return (
     <form>
       <label htmlFor='cardholderName'>
         <p>Cardholder Name</p>
-        <input
-          ref={cardHolderNameField}
-          type='text'
+        <InputMask
+          required
           id='cardholderName'
           placeholder='e.g: Jane Appleseed'
-          onKeyUp={updateCardHolderName}
+          onChange={(e: { target: { value: SetStateAction<string> } }) => {
+            const inputLen = e.target.value.length;
+            setCardHolderName(inputLen ? e.target.value : "Jane Appleseed");
+          }}
         />
       </label>
       <label htmlFor='cardNumber'>
         <p>Card Number</p>
-        <input
-          type='text'
+        <InputMask
+          required
+          mask='9999 9999 9999 9999'
           inputMode='numeric'
-          id='cardNumber'
+          maskPlaceholder={null}
           placeholder='e.g: 1234 5678 9123 0000'
+          onChange={(e: { target: { value: SetStateAction<string> } }) => {
+            const inputLen = e.target.value.length;
+            setCardNumber(inputLen ? e.target.value : "0000 0000 0000 0000");
+          }}
         />
       </label>
 
@@ -48,31 +48,50 @@ const PaymentForm = ({
         <label htmlFor='expirationMonth'>
           <p>Expiration Date</p>
           <div>
-            <input
-              type='text'
-              inputMode='numeric'
+            <InputMask
               id='expirationMonth'
+              mask='99'
+              inputMode='numeric'
+              maskPlaceholder={null}
               placeholder='MM'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const inputLen = e.target.value.length;
+                setExpirationDate((prev: { month: string; year: string }) => {
+                  return { ...prev, month: inputLen ? e.target.value : "0" };
+                });
+              }}
             />
             <label className='screenreader' htmlFor='expirationYear'>
               Expiration Year
             </label>
-            <input
-              type='text'
-              inputMode='numeric'
+            <InputMask
               id='expirationYear'
+              mask='99'
+              inputMode='numeric'
+              maskPlaceholder={null}
               placeholder='YY'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const inputLen = e.target.value.length;
+                setExpirationDate((prev: { month: string; year: string }) => {
+                  return { ...prev, year: inputLen ? e.target.value : "00" };
+                });
+              }}
             />
           </div>
         </label>
         <label htmlFor='cvc'>
           <p>CVC</p>
           <div>
-            <input
-              type='text'
-              inputMode='numeric'
+            <InputMask
               id='cvc'
+              mask='999'
+              inputMode='numeric'
+              maskPlaceholder={null}
               placeholder='e.g: 123'
+              onChange={(e: { target: { value: SetStateAction<string> } }) => {
+                const inputLen = e.target.value.length;
+                setCVC(inputLen ? e.target.value : "000");
+              }}
             />
           </div>
         </label>
