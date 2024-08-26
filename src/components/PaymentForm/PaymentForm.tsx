@@ -1,4 +1,4 @@
-import { useRef, type SetStateAction } from "react";
+import { type SetStateAction } from "react";
 import InputMask from "react-input-mask";
 import "./styles.css";
 
